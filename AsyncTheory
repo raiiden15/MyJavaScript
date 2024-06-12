@@ -1,0 +1,11 @@
+JavaScript -> Synchronus and Single Threaded
+    (Default JS Behaviour)    Synchronus matlab ek code fir ek code aise execute hoga, by default ye Synchronus h.
+    Single Threaded H .
+
+Execution Context -> line by line, each operation waits for the last one to complete before executing 
+
+    Blocking Code                   v/s     Non Blocking Code
+    Block the Flow of Program               does not block the flow of code
+    Read File Sync                          read file Async 
+    (tum koi kaam mat kro, jabtak           (Apna kaam karo, m dusra kaam krta hu)
+    mai mera kaam krra hu)                               

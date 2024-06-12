@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMl Events</title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing Image</h2>
+    <div->
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" ></li> 
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+    </div->
+</body>
+<script>
+    // Notes : 
+    // JavaScript k andar events sequentially hi run hote, kuch kuch execptions hote h. 
+    // Browser events activity pr invoke hote h, not sequentially 
+    // onclick="alert('OWL!')", ye approach mat karo
+    // document.getElementById('owl').onclick = function () {
+    //     alert("Owl Clicked")
+    // }
+    // Ye bhi mat karo, isme saari info nahi milti, isslie event listener use krna chahiye, since we get the ability of propagation. But What is Propagation ? 
+    // Propagation wala feature 
+    // document.getElementById('owl').addEventListener('click', (event) => { // event object milta h
+    //     // alert('Owl Clicked Again')
+    //     console.log(event);
+    // }, false) // false ? -> default parameter, isslie nahi likhte.  
+
+    // Event Object - detail me padho ye sb
+    // type, timestamp, defaultPrevented, target, srcElement, currentTarget
+    // clientX, clientY, screenX, screenY 
+    // altKey, ctrlKey, shiftKey, keyCode
+    
+    // Event Propagation has 2 contexts -> event bubbling and capturing, market me default (false) i.e event bubbling but sometimes event capturing is also used. 
+
+    // Example:
+    // document.getElementById('images').addEventListener('click', (event) => {
+    //     console.log("clicked inside the ul");
+    // }, false) // True krne pr, Bubbling in hota h, also called as event propagation Caputring 
+
+    // document.getElementById('owl').addEventListener('click', (event) => { // event object milta h
+    //     console.log("Owl Clicked");
+    //     // event.stopPropagation(); // this will stop bubbling up
+    // }, false) // Idhar inside se outside track horra h, i.e. Bubbling bolte usko , i.e event propagation is bubbling up!
+
+    // document.getElementById('google').addEventListener('click', (event) => {
+    //     event.preventDefault();
+    //     event.stopPropagation()
+    //     console.log("Google clicked");
+    // })
+
+    document.querySelector('#images').addEventListener('click', function() {
+        // console.log(event.target.parentNode); // i.e target k parent ko access krna hoga
+        console.log(event.target.tagName); // i.e target k tagName ko access krna hoga
+        // Approach 1 
+        // let removeIt = event.target.parentNode;
+        if (event.target.tagName === 'IMG') {
+            console.log(event.target.id);
+            // let removeIt = event.target.parentNode;
+            event.target.parentNode.remove();
+        }
+        // removeIt.remove(); // This is new
+
+        // Approach 2 (confusing)
+        // removeIt.parentNode.removeChild(removeIt) // Tree imagine karo, i.e. li k andar remove child bola to vo sirf image hatayega, steps here are li -> ul -> li remove hua (removeChild()) k madat se, konsa child ? jo removeIt me aya h
+    }, false)
+    
+</script>
+</html>

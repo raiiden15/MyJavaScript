@@ -1,0 +1,64 @@
+JS Execution Context, i.e. file execute kaise hogi, 2 phase me run hoti hai 
+
+Code dene k baad - hamesha ek GLOBAL EXECUTION CONTEXT BANTA HAI, jiska reference  `this` variable me stored hota hai.
+
+Browser ka GEC alag hota hai, node ka alag hota h, 
+Browser me `this` ki value window object hoti hai.
+
+FUNCTION EXECUTION CONTEXT, ek aur hota hai EVAL EXECUTION CONTEXT
+
+Code
+2 Phases 
+    1. Mem creation phase - isme bas vars ko jagah allocate hoti hai. (mem allocate hoti h isme)
+    2. Execution phase - saara execution isme hota h.
+Har FUNCTION k lie ek naya execution block banta hai
+Agar function k andar function hai, to vo call stack me chala jata hai, which works on LIFO, therefore the deepest function call is executed. 
+
+Example Code
+let val1 = 10
+let val2 = 5
+function addNum(num1, num2) {
+    let total = num1 + num2 
+    return total
+}
+let result1 = addNum(val1, val2)
+let result2 = addNum(10, 2)
+
+Step1 -> GEC and allocated to 'this'
+Step2 -> Memory Phase (First Cycle)
+        val1 -> undefined 
+        val2 -> undefined
+        addNum -> defination (yaha pr 18 se 13 tk ka kaam hua)
+        result1 -> undefined
+        result2 -> undefined
+Stpe3 -> Execution Phase (Second Cycle)
+        val1 <- 10
+        val2 <- 5
+        addNum ->   alg execution context tayar hua 
+                    har function k lie new executional context banta hai (Then First Cycle and Second Cycle wapas hoga) eg. 
+                        FC
+                        val1 -> undefined
+                        val2 -> undefined
+                        total -> undefined
+                        SC 
+                        num1 <- 10
+                        num2 <- 5
+                        total <- 15
+                        total is returned to global executional context(GEC)
+                    Now This Fnc's EC is deleted.
+        result1 <- 15
+        addNum ->  Cycle wapas hoga) eg. 
+                        FC
+                        val1 -> undefined
+                        val2 -> undefined
+                        total -> undefined
+                        SC 
+                        num1 <- 10
+                        num2 <- 2
+                        total <- 12
+                        total is returned to global executional context(GEC)
+                    Now This Fnc's EC is deleted.
+        result2 <- 12
+
+Call Stack's 
+Chrome pr Inspect kro js file ko to understand

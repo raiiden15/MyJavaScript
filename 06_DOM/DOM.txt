@@ -1,0 +1,16 @@
+DOM - Document Object Model
+HTMLcollections are not arrays, though they can be converted to arrays.
+See diagram for reference on excalidraw, we need to see the chart to understand to which particular path we should take for reaching a particular object, therefore that graph or tree is necesarry.
+
+
+
+innerText and textContent
+text content will show hidden texts also, while innerText only shows what's visible. 
+use case dono ka alag h.
+
+innerHTML - pura HTML ka value deta h.
+eg:
+'DOM Learning with Hitesh Sir<span style="display: none;">test text</span>'
+
+document.querySelector('h1') - ye code first occurence of h1 dikhata h
+document.querySelectorAll('h1') - ye code saare occurences of h1 dikhata h

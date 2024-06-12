@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async Project 1</title>
+</head>
+<body>
+    <h1>Async</h1>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    // setInterval k saath clearInterval, dono padhna
+    // setTimeout k saath clearTimeout, dono padhna
+    // setTimeout(() => {
+    //     console.log("Hi");
+    // }, 2000);
+    
+    // setInterval(() => {
+    //     console.log("Interval");
+    // }, 2000);
+
+    const sayHi = () => {
+        console.log("Hi via CallBack");
+    }
+    
+    const update = function() {
+        document.querySelector('h1').innerHTML = "Best JavaScript Series"
+    }
+
+    // setTimeout(sayHi, 2000);
+    const Interval = setInterval(update, 2000);
+
+    // Timeout ko rokna kaise h ? 
+    // clearTimeout(Interval) // isko reference chahiye, to which setTimeout we want to remove. Hum usually event pr lagate h.
+
+    document.querySelector('#stop').addEventListener('click', function() {
+        clearInterval(Interval);
+        console.log("Stopped!!");
+    })
+</script>
+</html>
